@@ -6,11 +6,12 @@
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-  <h1>Вітаємо, {{ user['username'] }}!</h1>
-<p>Кількість кліків: {{ user['clicks'] }}</p>
+<h1>Вітаємо, {{ user.username }}!</h1>
+<p>Кількість кліків: {{ user.clicks }}</p>
 <form method="post" action="/click">
     <button type="submit">Клікнути!</button>
 </form>
+
 
 </body>
 </html>

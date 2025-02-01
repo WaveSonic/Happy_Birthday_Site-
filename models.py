@@ -1,22 +1,16 @@
-from database import get_db_connection
+from flask_sqlalchemy import SQLAlchemy
 
-# Отримання користувача за device_id
-def get_user_by_device(device_id):
-    conn = get_db_connection()
-    user = conn.execute('SELECT * FROM users WHERE device_id = ?', (device_id,)).fetchone()
-    conn.close()
-    return user
+db = SQLAlchemy()
 
-# Додавання нового користувача
-def add_user(device_id, username):
-    conn = get_db_connection()
-    conn.execute('INSERT INTO users (device_id, username) VALUES (?, ?)', (device_id, username))
-    conn.commit()
-    conn.close()
 
-# Оновлення кількості кліків
-def increment_clicks(device_id):
-    conn = get_db_connection()
-    conn.execute('UPDATE users SET clicks = clicks + 1 WHERE device_id = ?', (device_id,))
-    conn.commit()
-    conn.close()
+class User(db.Model):
+    __tablename__ = 'users'
+
+    device_id = db.Column(db.String(36), primary_key=True)
+    username = db.Column(db.String(50), nullable=False)
+    clicks = db.Column(db.Integer, default=0)
+    booster_modifier = db.Column(db.Integer, default=1)
+
+    def __init__(self, device_id, username):
+        self.device_id = device_id
+        self.username = username
