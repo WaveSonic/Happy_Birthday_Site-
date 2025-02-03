@@ -1,17 +1,46 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Клікер на торті</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <meta charset="UTF-8">
+    <title>Clicker Game</title>
+    <link rel="stylesheet" href="static/style.css">
 </head>
 <body>
-<h1>Вітаємо, {{ user.username }}!</h1>
-<p>Кількість кліків: {{ user.clicks }}</p>
-<form method="post" action="/click">
-    <button type="submit">Клікнути!</button>
-</form>
 
+<div id="container">
+    <!-- Ліва панель -->
+    <div id="left-panel">
+        <div id="cookie-count">🍪 0</div>
+        <div id="cps">cookies/second: 0</div>
+        <button class="menu-button" onclick="resetGame()">Reset</button>
+    </div>
 
+    <!-- Центральна панель -->
+    <div id="main-panel">
+        <div id="status-message">You feel like making cookies.<br>But nobody wants to eat your cookies.</div>
+        <div id="cookie" onclick="clickCookie()"></div>
+    </div>
+
+    <!-- Права панель -->
+    <div id="right-panel">
+        <div class="shop-item disabled" data-item="Cursor" onclick="buyItem('Cursor')">
+            Cursor - <span class="price">🍪 15</span>
+            <div class="owned">Owned: 0</div>
+            <span>Autoclicks every 5 seconds.</span>
+        </div>
+        <div class="shop-item disabled" data-item="Grandma" onclick="buyItem('Grandma')">
+            Grandma - <span class="price">🍪 100</span>
+            <div class="owned">Owned: 0</div>
+            <span>A nice grandma to bake more cookies.</span>
+        </div>
+        <div class="shop-item disabled" data-item="Factory" onclick="buyItem('Factory')">
+            Factory - <span class="price">🍪 500</span>
+            <div class="owned">Owned: 0</div>
+            <span>Produces large quantities of cookies.</span>
+        </div>
+    </div>
+</div>
+
+<script src="static/script.js"></script>
 </body>
 </html>
